@@ -189,3 +189,4 @@ Traceback (most recent call last):
   File "D:\Evann\Desktop\Red-DiscordBot\cogs\image.py", line 102, in moustache
     text[0] = "mustache"
 TypeError: 'str' object does not support item assignment
+[07/08/2016 19:08] CRITICAL dataIO _restore_json 67: config/downloader/repos.json is corrupted and there is no backup copy available.
