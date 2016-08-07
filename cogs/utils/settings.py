@@ -2,7 +2,7 @@ from .dataIO import fileIO
 import discord
 import os
 
-default_path = "data/red/settings.json"
+default_path = "config/red/settings.json"
 
 class Settings:
     def __init__(self,path=default_path):
@@ -25,7 +25,7 @@ class Settings:
             self.update_old_settings()
 
     def check_folders(self):
-        folders = ("data", os.path.dirname(self.path), "cogs", "cogs/utils")
+        folders = ("config", os.path.dirname(self.path), "cogs", "cogs/utils")
         for folder in folders:
             if not os.path.exists(folder):
                 print("Creating " + folder + " folder...")

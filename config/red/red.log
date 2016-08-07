@@ -1,0 +1,191 @@
+[07/08/2016 17:33] ERROR red load_cogs 352: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 159, 44, '\t@commands.command(no_pm=True, hidden=True)\n'))
+Traceback (most recent call last):
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 530, in _load_cog
+    mod_obj = importlib.import_module(cogname)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 658, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 724, in source_to_code
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\general.py", line 159
+    @commands.command(no_pm=True, hidden=True)
+                                             ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "red.py", line 349, in load_cogs
+    owner_cog._load_cog(extension)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 534, in _load_cog
+    raise CogLoadError(*e.args)
+cogs.owner.CogLoadError: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 159, 44, '\t@commands.command(no_pm=True, hidden=True)\n'))
+[07/08/2016 17:36] ERROR red <module> 425: Traceback (most recent call last):
+  File "red.py", line 411, in <module>
+    loop.run_until_complete(main())
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\asyncio\base_events.py", line 325, in run_until_complete
+    self.run_forever()
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\asyncio\base_events.py", line 295, in run_forever
+    self._run_once()
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\asyncio\base_events.py", line 1218, in _run_once
+    event_list = self._selector.select(timeout)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\selectors.py", line 314, in select
+    r, w, _ = self._select(self._readers, self._writers, [], timeout)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\selectors.py", line 305, in _select
+    r, w, x = select.select(r, w, w, timeout)
+KeyboardInterrupt
+
+[07/08/2016 17:37] ERROR red load_cogs 352: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 159, 44, '\t@commands.command(no_pm=True, hidden=True)\n'))
+Traceback (most recent call last):
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 530, in _load_cog
+    mod_obj = importlib.import_module(cogname)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 658, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 724, in source_to_code
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\general.py", line 159
+    @commands.command(no_pm=True, hidden=True)
+                                             ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "red.py", line 349, in load_cogs
+    owner_cog._load_cog(extension)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 534, in _load_cog
+    raise CogLoadError(*e.args)
+cogs.owner.CogLoadError: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 159, 44, '\t@commands.command(no_pm=True, hidden=True)\n'))
+[07/08/2016 17:47] ERROR red load_cogs 352: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 165, 23, '\t\tif name == "FATbot":\n'))
+Traceback (most recent call last):
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 530, in _load_cog
+    mod_obj = importlib.import_module(cogname)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 658, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 724, in source_to_code
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\general.py", line 165
+    if name == "FATbot":
+                       ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "red.py", line 349, in load_cogs
+    owner_cog._load_cog(extension)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 534, in _load_cog
+    raise CogLoadError(*e.args)
+cogs.owner.CogLoadError: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 165, 23, '\t\tif name == "FATbot":\n'))
+[07/08/2016 17:49] ERROR red load_cogs 352: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 165, 22, '\tif name == "FATbot":\n'))
+Traceback (most recent call last):
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 530, in _load_cog
+    mod_obj = importlib.import_module(cogname)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 658, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 724, in source_to_code
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\general.py", line 165
+    if name == "FATbot":
+                       ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "red.py", line 349, in load_cogs
+    owner_cog._load_cog(extension)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 534, in _load_cog
+    raise CogLoadError(*e.args)
+cogs.owner.CogLoadError: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 165, 22, '\tif name == "FATbot":\n'))
+[07/08/2016 17:51] ERROR red load_cogs 352: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 165, 22, '\tif name == "FATbot":\n'))
+Traceback (most recent call last):
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 530, in _load_cog
+    mod_obj = importlib.import_module(cogname)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 658, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 724, in source_to_code
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\general.py", line 165
+    if name == "FATbot":
+                       ^
+TabError: inconsistent use of tabs and spaces in indentation
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "red.py", line 349, in load_cogs
+    owner_cog._load_cog(extension)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 534, in _load_cog
+    raise CogLoadError(*e.args)
+cogs.owner.CogLoadError: ('inconsistent use of tabs and spaces in indentation', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\general.py', 165, 22, '\tif name == "FATbot":\n'))
+[07/08/2016 18:07] ERROR red load_cogs 352: ('starred assignment target must be in a list or tuple', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\image.py', 104, 8, '*text = "mustache"\n'))
+Traceback (most recent call last):
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 530, in _load_cog
+    mod_obj = importlib.import_module(cogname)
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 658, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 764, in get_code
+  File "<frozen importlib._bootstrap_external>", line 724, in source_to_code
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\image.py", line 104
+    *text = "mustache"
+           ^
+SyntaxError: starred assignment target must be in a list or tuple
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "red.py", line 349, in load_cogs
+    owner_cog._load_cog(extension)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\owner.py", line 534, in _load_cog
+    raise CogLoadError(*e.args)
+cogs.owner.CogLoadError: ('starred assignment target must be in a list or tuple', ('D:\\Evann\\Desktop\\Red-DiscordBot\\cogs\\image.py', 104, 8, '*text = "mustache"\n'))
+[07/08/2016 18:10] ERROR red on_command_error 92: Exception in command 'moustache'
+Traceback (most recent call last):
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\site-packages\discord\ext\commands\core.py", line 50, in wrapped
+    ret = yield from coro(*args, **kwargs)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\image.py", line 101, in moustache
+    text[0] = 'mustache'
+NameError: name 'text' is not defined
+[07/08/2016 18:12] ERROR red on_command_error 92: Exception in command 'moustache'
+Traceback (most recent call last):
+  File "C:\Users\Evann\AppData\Local\Programs\Python\Python35\lib\site-packages\discord\ext\commands\core.py", line 50, in wrapped
+    ret = yield from coro(*args, **kwargs)
+  File "D:\Evann\Desktop\Red-DiscordBot\cogs\image.py", line 102, in moustache
+    text[0] = "mustache"
+TypeError: 'str' object does not support item assignment

@@ -11,7 +11,7 @@ class CustomCommands:
 
     def __init__(self, bot):
         self.bot = bot
-        self.c_commands = fileIO("data/customcom/commands.json", "load")
+        self.c_commands = fileIO("config/customcom/commands.json", "load")
 
     @commands.command(pass_context=True, no_pm=True)
     @checks.mod_or_permissions(administrator=True)
@@ -32,7 +32,7 @@ class CustomCommands:
         if command not in cmdlist:
             cmdlist[command] = text
             self.c_commands[server.id] = cmdlist
-            fileIO("data/customcom/commands.json", "save", self.c_commands)
+            fileIO("config/customcom/commands.json", "save", self.c_commands)
             await self.bot.say("Custom command successfully added.")
         else:
             await self.bot.say("This command already exists. Use editcom to edit it.")
@@ -52,7 +52,7 @@ class CustomCommands:
             if command in cmdlist:
                 cmdlist[command] = text
                 self.c_commands[server.id] = cmdlist
-                fileIO("data/customcom/commands.json", "save", self.c_commands)
+                fileIO("config/customcom/commands.json", "save", self.c_commands)
                 await self.bot.say("Custom command successfully edited.")
             else:
                 await self.bot.say("That command doesn't exist. Use addcom [command] [text]")
@@ -73,7 +73,7 @@ class CustomCommands:
             if command in cmdlist:
                 cmdlist.pop(command, None)
                 self.c_commands[server.id] = cmdlist
-                fileIO("data/customcom/commands.json", "save", self.c_commands)
+                fileIO("config/customcom/commands.json", "save", self.c_commands)
                 await self.bot.say("Custom command successfully deleted.")
             else:
                 await self.bot.say("That command doesn't exist.")
@@ -166,12 +166,12 @@ class CustomCommands:
 
 
 def check_folders():
-    if not os.path.exists("data/customcom"):
-        print("Creating data/customcom folder...")
-        os.makedirs("data/customcom")
+    if not os.path.exists("config/customcom"):
+        print("Creating config/customcom folder...")
+        os.makedirs("config/customcom")
 
 def check_files():
-    f = "data/customcom/commands.json"
+    f = "config/customcom/commands.json"
     if not fileIO(f, "check"):
         print("Creating empty commands.json...")
         fileIO(f, "save", {})

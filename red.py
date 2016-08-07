@@ -167,7 +167,7 @@ async def set_bot_owner():
 
 
 def check_folders():
-    folders = ("data", "data/red", "cogs", "cogs/utils")
+    folders = ("config", "config/red", "cogs", "cogs/utils")
     for folder in folders:
         if not os.path.exists(folder):
             print("Creating " + folder + " folder...")
@@ -193,7 +193,7 @@ def check_configs():
             settings.email = choice
             settings.password = input("\nPassword> ")
         else:
-            os.remove('data/red/settings.json')
+            os.remove('config/red/settings.json')
             input("Invalid input. Restart Red and repeat the configuration "
                   "process.")
             exit(1)
@@ -245,16 +245,16 @@ def check_configs():
               "chat, *this window will now be read only*.\nPress enter to continue")
         input("\n")
 
-    if not os.path.isfile("data/red/cogs.json"):
+    if not os.path.isfile("config/red/cogs.json"):
         print("Creating new cogs.json...")
-        dataIO.save_json("data/red/cogs.json", {})
+        dataIO.save_json("config/red/cogs.json", {})
 
 def set_logger():
     global logger
     logger = logging.getLogger("discord")
     logger.setLevel(logging.WARNING)
     handler = logging.FileHandler(
-        filename='data/red/discord.log', encoding='utf-8', mode='a')
+        filename='config/red/discord.log', encoding='utf-8', mode='a')
     handler.setFormatter(logging.Formatter(
         '%(asctime)s %(levelname)s %(module)s %(funcName)s %(lineno)d: '
         '%(message)s',
@@ -274,7 +274,7 @@ def set_logger():
     stdout_handler.setLevel(logging.INFO)
 
     fhandler = logging.handlers.RotatingFileHandler(
-        filename='data/red/red.log', encoding='utf-8', mode='a',
+        filename='config/red/red.log', encoding='utf-8', mode='a',
         maxBytes=10**7, backupCount=5)
     fhandler.setFormatter(red_format)
 
@@ -298,9 +298,9 @@ def get_answer():
         return False
 
 def set_cog(cog, value):
-    data = dataIO.load_json("data/red/cogs.json")
+    data = dataIO.load_json("config/red/cogs.json")
     data[cog] = value
-    dataIO.save_json("data/red/cogs.json", data)
+    dataIO.save_json("config/red/cogs.json", data)
 
 def load_cogs():
     try:
@@ -312,7 +312,7 @@ def load_cogs():
         no_prompt = False
 
     try:
-        registry = dataIO.load_json("data/red/cogs.json")
+        registry = dataIO.load_json("config/red/cogs.json")
     except:
         registry = {}
 
@@ -354,7 +354,7 @@ def load_cogs():
             registry[extension] = False
 
     if extensions:
-        dataIO.save_json("data/red/cogs.json", registry)
+        dataIO.save_json("config/red/cogs.json", registry)
 
     if failed:
         print("\nFailed to load: ", end="")
@@ -418,9 +418,9 @@ if __name__ == '__main__':
             "delete the current configuration and redo the setup process "
             "again the next start.\n> ")
         if choice.strip() == "reset":
-            shutil.copy('data/red/settings.json',
-                        'data/red/settings-{}.bak'.format(int(time.time())))
-            os.remove('data/red/settings.json')
+            shutil.copy('config/red/settings.json',
+                        'config/red/settings-{}.bak'.format(int(time.time())))
+            os.remove('config/red/settings.json')
     except:
         logger.error(traceback.format_exc())
         loop.run_until_complete(bot.logout())

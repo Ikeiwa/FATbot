@@ -175,7 +175,7 @@ class Bank:
         return Account(**account)
 
     def _save_bank(self):
-        dataIO.save_json("data/economy/bank.json", self.accounts)
+        dataIO.save_json("config/economy/bank.json", self.accounts)
 
     def _get_account(self, user):
         server = user.server
@@ -192,8 +192,8 @@ class Economy:
     def __init__(self, bot):
         global default_settings
         self.bot = bot
-        self.bank = Bank(bot, "data/economy/bank.json")
-        self.settings = fileIO("data/economy/settings.json", "load")
+        self.bank = Bank(bot, "config/economy/bank.json")
+        self.settings = fileIO("config/economy/settings.json", "load")
         if "PAYDAY_TIME" in self.settings: #old format
             default_settings = self.settings
             self.settings = {}
@@ -456,7 +456,7 @@ class Economy:
         server = ctx.message.server
         self.settings[server.id]["SLOT_MIN"] = bid
         await self.bot.say("Minimum bid is now " + str(bid) + " credits.")
-        fileIO("data/economy/settings.json", "save", self.settings)
+        fileIO("config/economy/settings.json", "save", self.settings)
 
     @economyset.command(pass_context=True)
     async def slotmax(self, ctx, bid : int):
@@ -464,7 +464,7 @@ class Economy:
         server = ctx.message.server
         self.settings[server.id]["SLOT_MAX"] = bid
         await self.bot.say("Maximum bid is now " + str(bid) + " credits.")
-        fileIO("data/economy/settings.json", "save", self.settings)
+        fileIO("config/economy/settings.json", "save", self.settings)
 
     @economyset.command(pass_context=True)
     async def slottime(self, ctx, seconds : int):
@@ -472,7 +472,7 @@ class Economy:
         server = ctx.message.server
         self.settings[server.id]["SLOT_TIME"] = seconds
         await self.bot.say("Cooldown is now " + str(seconds) + " seconds.")
-        fileIO("data/economy/settings.json", "save", self.settings)
+        fileIO("config/economy/settings.json", "save", self.settings)
 
     @economyset.command(pass_context=True)
     async def paydaytime(self, ctx, seconds : int):
@@ -480,7 +480,7 @@ class Economy:
         server = ctx.message.server
         self.settings[server.id]["PAYDAY_TIME"] = seconds
         await self.bot.say("Value modified. At least " + str(seconds) + " seconds must pass between each payday.")
-        fileIO("data/economy/settings.json", "save", self.settings)
+        fileIO("config/economy/settings.json", "save", self.settings)
 
     @economyset.command(pass_context=True)
     async def paydaycredits(self, ctx, credits : int):
@@ -488,7 +488,7 @@ class Economy:
         server = ctx.message.server
         self.settings[server.id]["PAYDAY_CREDITS"] = credits
         await self.bot.say("Every payday will now give " + str(credits) + " credits.")
-        fileIO("data/economy/settings.json", "save", self.settings)
+        fileIO("config/economy/settings.json", "save", self.settings)
 
     def display_time(self, seconds, granularity=2): # What would I ever do without stackoverflow?
         intervals = (                               # Source: http://stackoverflow.com/a/24542445
@@ -511,18 +511,18 @@ class Economy:
         return ', '.join(result[:granularity])
 
 def check_folders():
-    if not os.path.exists("data/economy"):
-        print("Creating data/economy folder...")
-        os.makedirs("data/economy")
+    if not os.path.exists("config/economy"):
+        print("Creating config/economy folder...")
+        os.makedirs("config/economy")
 
 def check_files():
 
-    f = "data/economy/settings.json"
+    f = "config/economy/settings.json"
     if not fileIO(f, "check"):
         print("Creating default economy's settings.json...")
         fileIO(f, "save", {})
 
-    f = "data/economy/bank.json"
+    f = "config/economy/bank.json"
     if not fileIO(f, "check"):
         print("Creating empty bank.json...")
         fileIO(f, "save", {})
@@ -534,7 +534,7 @@ def setup(bot):
     logger = logging.getLogger("red.economy")
     if logger.level == 0: # Prevents the logger from being loaded again in case of module reload
         logger.setLevel(logging.INFO)
-        handler = logging.FileHandler(filename='data/economy/economy.log', encoding='utf-8', mode='a')
+        handler = logging.FileHandler(filename='config/economy/economy.log', encoding='utf-8', mode='a')
         handler.setFormatter(logging.Formatter('%(asctime)s %(message)s', datefmt="[%d/%m/%Y %H:%M]"))
         logger.addHandler(handler)
     bot.add_cog(Economy(bot))

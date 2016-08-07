@@ -18,9 +18,9 @@ class Streams:
 
     def __init__(self, bot):
         self.bot = bot
-        self.twitch_streams = fileIO("data/streams/twitch.json", "load")
-        self.hitbox_streams = fileIO("data/streams/hitbox.json", "load")
-        self.beam_streams = fileIO("data/streams/beam.json", "load")
+        self.twitch_streams = fileIO("config/streams/twitch.json", "load")
+        self.hitbox_streams = fileIO("config/streams/hitbox.json", "load")
+        self.beam_streams = fileIO("config/streams/beam.json", "load")
 
     @commands.command()
     async def hitbox(self, stream: str):
@@ -115,7 +115,7 @@ class Streams:
             await self.bot.say("Alert activated. I will notify this channel "
                                "everytime {} is live.".format(stream))
 
-        fileIO("data/streams/twitch.json", "save", self.twitch_streams)
+        fileIO("config/streams/twitch.json", "save", self.twitch_streams)
 
     @streamalert.command(name="hitbox", pass_context=True)
     async def hitbox_alert(self, ctx, stream: str):
@@ -159,7 +159,7 @@ class Streams:
             await self.bot.say("Alert activated. I will notify this channel "
                                "everytime {} is live.".format(stream))
 
-        fileIO("data/streams/hitbox.json", "save", self.hitbox_streams)
+        fileIO("config/streams/hitbox.json", "save", self.hitbox_streams)
 
     @streamalert.command(name="beam", pass_context=True)
     async def beam_alert(self, ctx, stream: str):
@@ -203,7 +203,7 @@ class Streams:
             await self.bot.say("Alert activated. I will notify this channel "
                                "everytime {} is live.".format(stream))
 
-        fileIO("data/streams/beam.json", "save", self.beam_streams)
+        fileIO("config/streams/beam.json", "save", self.beam_streams)
 
     @streamalert.command(name="stop", pass_context=True)
     async def stop_alert(self, ctx):
@@ -246,9 +246,9 @@ class Streams:
         for s in to_delete:
             self.beam_streams.remove(s)
 
-        fileIO("data/streams/twitch.json", "save", self.twitch_streams)
-        fileIO("data/streams/hitbox.json", "save", self.hitbox_streams)
-        fileIO("data/streams/beam.json", "save", self.beam_streams)
+        fileIO("config/streams/twitch.json", "save", self.twitch_streams)
+        fileIO("config/streams/hitbox.json", "save", self.hitbox_streams)
+        fileIO("config/streams/beam.json", "save", self.beam_streams)
 
         await self.bot.say("There will be no more stream alerts in this "
                            "channel.")
@@ -375,31 +375,31 @@ class Streams:
 
             if old != (self.twitch_streams, self.hitbox_streams,
                        self.beam_streams):
-                fileIO("data/streams/twitch.json", "save", self.twitch_streams)
-                fileIO("data/streams/hitbox.json", "save", self.hitbox_streams)
-                fileIO("data/streams/beam.json", "save", self.beam_streams)
+                fileIO("config/streams/twitch.json", "save", self.twitch_streams)
+                fileIO("config/streams/hitbox.json", "save", self.hitbox_streams)
+                fileIO("config/streams/beam.json", "save", self.beam_streams)
 
             await asyncio.sleep(CHECK_DELAY)
 
 
 def check_folders():
-    if not os.path.exists("data/streams"):
-        print("Creating data/streams folder...")
-        os.makedirs("data/streams")
+    if not os.path.exists("config/streams"):
+        print("Creating config/streams folder...")
+        os.makedirs("config/streams")
 
 
 def check_files():
-    f = "data/streams/twitch.json"
+    f = "config/streams/twitch.json"
     if not fileIO(f, "check"):
         print("Creating empty twitch.json...")
         fileIO(f, "save", [])
 
-    f = "data/streams/hitbox.json"
+    f = "config/streams/hitbox.json"
     if not fileIO(f, "check"):
         print("Creating empty hitbox.json...")
         fileIO(f, "save", [])
 
-    f = "data/streams/beam.json"
+    f = "config/streams/beam.json"
     if not fileIO(f, "check"):
         print("Creating empty beam.json...")
         fileIO(f, "save", [])

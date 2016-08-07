@@ -10,7 +10,7 @@ from copy import deepcopy
 class Alias:
     def __init__(self, bot):
         self.bot = bot
-        self.aliases = fileIO("data/alias/aliases.json", "load")
+        self.aliases = fileIO("config/alias/aliases.json", "load")
 
     @commands.group(pass_context=True, no_pm=True)
     async def alias(self, ctx):
@@ -42,7 +42,7 @@ class Alias:
             self.aliases[server.id] = {}
         if command not in self.bot.commands:
             self.aliases[server.id][command] = to_execute
-            fileIO("data/alias/aliases.json", "save", self.aliases)
+            fileIO("config/alias/aliases.json", "save", self.aliases)
             await self.bot.say("Alias '{}' added.".format(command))
         else:
             await self.bot.say("Cannot add '{}' because it's a real bot "
@@ -84,7 +84,7 @@ class Alias:
         server = ctx.message.server
         if server.id in self.aliases:
             self.aliases[server.id].pop(command, None)
-            fileIO("data/alias/aliases.json", "save", self.aliases)
+            fileIO("config/alias/aliases.json", "save", self.aliases)
         await self.bot.say("Alias '{}' deleted.".format(command))
 
     @alias.command(name="list", pass_context=True, no_pm=True)
@@ -153,7 +153,7 @@ class Alias:
                 del self.aliases[sid][alias]
             for alias, command in to_add:  # For fixing caps
                 self.aliases[sid][alias] = command
-        fileIO("data/alias/aliases.json", "save", self.aliases)
+        fileIO("config/alias/aliases.json", "save", self.aliases)
 
     def first_word(self, msg):
         return msg.split(" ")[0]
@@ -166,15 +166,15 @@ class Alias:
 
 
 def check_folder():
-    if not os.path.exists("data/alias"):
-        print("Creating data/alias folder...")
-        os.makedirs("data/alias")
+    if not os.path.exists("config/alias"):
+        print("Creating config/alias folder...")
+        os.makedirs("config/alias")
 
 
 def check_file():
     aliases = {}
 
-    f = "data/alias/aliases.json"
+    f = "config/alias/aliases.json"
     if not fileIO(f, "check"):
         print("Creating default alias's aliases.json...")
         fileIO(f, "save", aliases)

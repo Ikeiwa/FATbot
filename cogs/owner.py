@@ -45,7 +45,7 @@ class Owner:
     def __init__(self, bot):
         self.bot = bot
         self.setowner_lock = False
-        self.disabled_commands = fileIO("data/red/disabled_commands.json", "load")
+        self.disabled_commands = fileIO("config/red/disabled_commands.json", "load")
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
 
     def __unload(self):
@@ -347,7 +347,7 @@ class Owner:
             comm_obj.enabled = False
             comm_obj.hidden = True
             self.disabled_commands.append(command)
-            fileIO("data/red/disabled_commands.json", "save", self.disabled_commands)
+            fileIO("config/red/disabled_commands.json", "save", self.disabled_commands)
             await self.bot.say("Command has been disabled.")
 
     @command_disabler.command()
@@ -355,7 +355,7 @@ class Owner:
         """Enables commands/subcommands"""
         if command in self.disabled_commands:
             self.disabled_commands.remove(command)
-            fileIO("data/red/disabled_commands.json", "save", self.disabled_commands)
+            fileIO("config/red/disabled_commands.json", "save", self.disabled_commands)
             await self.bot.say("Command enabled.")
         else:
             await self.bot.say("That command is not disabled.")
@@ -586,9 +586,9 @@ class Owner:
             *version)
 
 def check_files():
-    if not os.path.isfile("data/red/disabled_commands.json"):
+    if not os.path.isfile("config/red/disabled_commands.json"):
         print("Creating empty disabled_commands.json...")
-        fileIO("data/red/disabled_commands.json", "save", [])
+        fileIO("config/red/disabled_commands.json", "save", [])
 
 def setup(bot):
     check_files()

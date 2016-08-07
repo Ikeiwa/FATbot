@@ -45,7 +45,7 @@ youtube_dl_options = {
     'ignoreerrors': True,
     'quiet': True,
     'no_warnings': True,
-    'outtmpl': "data/audio/cache/%(id)s",
+    'outtmpl': "config/audio/cache/%(id)s",
     'default_search': 'auto'
 }
 
@@ -140,7 +140,7 @@ class Playlist:
 
     @property
     def filename(self):
-        f = "data/audio/playlists"
+        f = "config/audio/playlists"
         f = os.path.join(f, self.sid, self.name + ".txt")
         return f
 
@@ -173,7 +173,7 @@ class Playlist:
 
 class Downloader(threading.Thread):
     def __init__(self, url, max_duration=None, download=False,
-                 cache_path="data/audio/cache", *args, **kwargs):
+                 cache_path="config/audio/cache", *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.url = url
         self.max_duration = max_duration
@@ -198,7 +198,7 @@ class Downloader(threading.Thread):
     def download(self):
         self.duration_check()
 
-        if not os.path.isfile('data/audio/cache' + self.song.id):
+        if not os.path.isfile('config/audio/cache' + self.song.id):
             video = self._yt.extract_info(self.url)
             self.song = Song(**video)
 
@@ -235,11 +235,11 @@ class Audio:
         self.bot = bot
         self.queue = {}  # add deque's, repeat
         self.downloaders = {}  # sid: object
-        self.settings = fileIO("data/audio/settings.json", 'load')
+        self.settings = fileIO("config/audio/settings.json", 'load')
         self.server_specific_setting_keys = ["VOLUME", "QUEUE_MODE",
                                              "VOTE_THRESHOLD"]
-        self.cache_path = "data/audio/cache"
-        self.local_playlist_path = "data/audio/localtracks"
+        self.cache_path = "config/audio/cache"
+        self.local_playlist_path = "config/audio/localtracks"
         self._old_game = False
 
     async def _add_song_status(self, song):
@@ -369,7 +369,7 @@ class Audio:
         if not name.endswith('.txt'):
             name = name + ".txt"
         try:
-            os.remove(os.path.join('data/audio/playlists', server.id, name))
+            os.remove(os.path.join('config/audio/playlists', server.id, name))
         except OSError:
             pass
         except WindowsError:
@@ -590,7 +590,7 @@ class Audio:
             server = server.id
         except:
             pass
-        path = "data/audio/playlists"
+        path = "config/audio/playlists"
         old_playlists = [f[:-4] for f in os.listdir(path)
                          if f.endswith(".txt")]
         path = os.path.join(path, server)
@@ -607,7 +607,7 @@ class Audio:
         except:
             pass
 
-        f = "data/audio/playlists"
+        f = "config/audio/playlists"
         if local:
             f = os.path.join(f, server, name + ".txt")
         else:
@@ -799,7 +799,7 @@ class Audio:
             self._playlist_exists_global(name)
 
     def _playlist_exists_global(self, name):
-        f = "data/audio/playlists"
+        f = "config/audio/playlists"
         f = os.path.join(f, name + ".txt")
         log.debug('checking for {}'.format(f))
 
@@ -811,7 +811,7 @@ class Audio:
         except AttributeError:
             pass
 
-        f = "data/audio/playlists"
+        f = "config/audio/playlists"
         f = os.path.join(f, server, name + ".txt")
         log.debug('checking for {}'.format(f))
 
@@ -834,7 +834,7 @@ class Audio:
             playlist = playlist.to_json()
             log.debug("got playlist object")
         except AttributeError:
-            f = os.path.join("data/audio/playlists", sid, name + ".txt")
+            f = os.path.join("config/audio/playlists", sid, name + ".txt")
 
         head, _ = os.path.split(f)
         if not os.path.exists(head):
@@ -1834,7 +1834,7 @@ class Audio:
                 pass
 
     def save_settings(self):
-        fileIO('data/audio/settings.json', 'save', self.settings)
+        fileIO('config/audio/settings.json', 'save', self.settings)
 
     def set_server_setting(self, server, key, value):
         if server.id not in self.settings["SERVERS"]:
@@ -1877,8 +1877,8 @@ class Audio:
 
 
 def check_folders():
-    folders = ("data/audio", "data/audio/cache", "data/audio/playlists",
-               "data/audio/localtracks", "data/audio/sfx")
+    folders = ("config/audio", "config/audio/cache", "config/audio/playlists",
+               "config/audio/localtracks", "config/audio/sfx")
     for folder in folders:
         if not os.path.exists(folder):
             print("Creating " + folder + " folder...")
@@ -1890,7 +1890,7 @@ def check_files():
                "MAX_CACHE": 0, "SOUNDCLOUD_CLIENT_ID": None,
                "TITLE_STATUS": True, "AVCONV": False, "VOTE_THRESHOLD": 50,
                "SERVERS": {}}
-    settings_path = "data/audio/settings.json"
+    settings_path = "config/audio/settings.json"
 
     if not os.path.isfile(settings_path):
         print("Creating default audio settings.json...")

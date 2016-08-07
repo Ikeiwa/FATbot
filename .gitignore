@@ -2,7 +2,7 @@
 *.pyc
 __pycache__
 data
-!data/trivia/*
-!data/audio/playlists/*
+!config/trivia/*
+!config/audio/playlists/*
 *.exe
 *.dll

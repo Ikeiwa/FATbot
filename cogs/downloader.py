@@ -15,13 +15,13 @@ class Downloader:
 
     def __init__(self, bot):
         self.bot = bot
-        self.path = "data/downloader/"
+        self.path = "config/downloader/"
         # {name:{url,cog1:{installed},cog1:{installed}}}
-        self.repos = fileIO("data/downloader/repos.json", "load")
+        self.repos = fileIO("config/downloader/repos.json", "load")
         self.update_repos()
 
     def save_repos(self):
-        fileIO("data/downloader/repos.json", "save", self.repos)
+        fileIO("config/downloader/repos.json", "save", self.repos)
 
     @commands.group(pass_context=True)
     @checks.is_owner()
@@ -243,7 +243,7 @@ class Downloader:
         if os.path.exists(cog_data_path):
             print("Copying {}'s data folder...".format(cog))
             distutils.dir_util.copy_tree(cog_data_path,
-                                         os.path.join('data/', cog))
+                                         os.path.join('config/', cog))
         self.repos[repo_name][cog]['INSTALLED'] = True
         self.save_repos()
         return True
@@ -317,29 +317,29 @@ class Downloader:
     def update_repo(self, name):
         if name not in self.repos:
             return
-        if not os.path.exists("data/downloader/" + name):
+        if not os.path.exists("config/downloader/" + name):
             print("Downloading cogs repo...")
             url = self.repos[name]['url']
             # It's blocking but it shouldn't matter
-            call(["git", "clone", url, "data/downloader/" + name])
+            call(["git", "clone", url, "config/downloader/" + name])
         else:
-            Popen(["git", "-C", "data/downloader/" + name, "stash", "-q"])
-            Popen(["git", "-C", "data/downloader/" + name, "pull", "-q"])
+            Popen(["git", "-C", "config/downloader/" + name, "stash", "-q"])
+            Popen(["git", "-C", "config/downloader/" + name, "pull", "-q"])
 
 
 def check_folders():
-    if not os.path.exists("data/downloader"):
+    if not os.path.exists("config/downloader"):
         print('Making repo downloads folder...')
-        os.mkdir('data/downloader')
+        os.mkdir('config/downloader')
 
 
 def check_files():
     repos = \
         {'community': {'url': "https://github.com/Twentysix26/Red-Cogs.git"}}
 
-    f = "data/downloader/repos.json"
+    f = "config/downloader/repos.json"
     if not fileIO(f, "check"):
-        print("Creating default data/downloader/repos.json")
+        print("Creating default config/downloader/repos.json")
         fileIO(f, "save", repos)
 
 

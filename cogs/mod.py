@@ -15,12 +15,12 @@ class Mod:
 
     def __init__(self, bot):
         self.bot = bot
-        self.whitelist_list = dataIO.load_json("data/mod/whitelist.json")
-        self.blacklist_list = dataIO.load_json("data/mod/blacklist.json")
-        self.ignore_list = dataIO.load_json("data/mod/ignorelist.json")
-        self.filter = dataIO.load_json("data/mod/filter.json")
-        self.past_names = dataIO.load_json("data/mod/past_names.json")
-        self.past_nicknames = dataIO.load_json("data/mod/past_nicknames.json")
+        self.whitelist_list = dataIO.load_json("config/mod/whitelist.json")
+        self.blacklist_list = dataIO.load_json("config/mod/blacklist.json")
+        self.ignore_list = dataIO.load_json("config/mod/ignorelist.json")
+        self.filter = dataIO.load_json("config/mod/filter.json")
+        self.past_names = dataIO.load_json("config/mod/past_names.json")
+        self.past_nicknames = dataIO.load_json("config/mod/past_nicknames.json")
 
     @commands.group(pass_context=True, no_pm=True)
     @checks.serverowner_or_permissions(administrator=True)
@@ -335,7 +335,7 @@ class Mod:
         """Adds user to bot's blacklist"""
         if user.id not in self.blacklist_list:
             self.blacklist_list.append(user.id)
-            fileIO("data/mod/blacklist.json", "save", self.blacklist_list)
+            fileIO("config/mod/blacklist.json", "save", self.blacklist_list)
             await self.bot.say("User has been added to blacklist.")
         else:
             await self.bot.say("User is already blacklisted.")
@@ -345,7 +345,7 @@ class Mod:
         """Removes user to bot's blacklist"""
         if user.id in self.blacklist_list:
             self.blacklist_list.remove(user.id)
-            fileIO("data/mod/blacklist.json", "save", self.blacklist_list)
+            fileIO("config/mod/blacklist.json", "save", self.blacklist_list)
             await self.bot.say("User has been removed from blacklist.")
         else:
             await self.bot.say("User is not in blacklist.")
@@ -366,7 +366,7 @@ class Mod:
             else:
                 msg = ""
             self.whitelist_list.append(user.id)
-            fileIO("data/mod/whitelist.json", "save", self.whitelist_list)
+            fileIO("config/mod/whitelist.json", "save", self.whitelist_list)
             await self.bot.say("User has been added to whitelist." + msg)
         else:
             await self.bot.say("User is already whitelisted.")
@@ -376,7 +376,7 @@ class Mod:
         """Removes user to bot's whitelist"""
         if user.id in self.whitelist_list:
             self.whitelist_list.remove(user.id)
-            fileIO("data/mod/whitelist.json", "save", self.whitelist_list)
+            fileIO("config/mod/whitelist.json", "save", self.whitelist_list)
             await self.bot.say("User has been removed from whitelist.")
         else:
             await self.bot.say("User is not in whitelist.")
@@ -398,14 +398,14 @@ class Mod:
         if not channel:
             if current_ch.id not in self.ignore_list["CHANNELS"]:
                 self.ignore_list["CHANNELS"].append(current_ch.id)
-                fileIO("data/mod/ignorelist.json", "save", self.ignore_list)
+                fileIO("config/mod/ignorelist.json", "save", self.ignore_list)
                 await self.bot.say("Channel added to ignore list.")
             else:
                 await self.bot.say("Channel already in ignore list.")
         else:
             if channel.id not in self.ignore_list["CHANNELS"]:
                 self.ignore_list["CHANNELS"].append(channel.id)
-                fileIO("data/mod/ignorelist.json", "save", self.ignore_list)
+                fileIO("config/mod/ignorelist.json", "save", self.ignore_list)
                 await self.bot.say("Channel added to ignore list.")
             else:
                 await self.bot.say("Channel already in ignore list.")
@@ -416,7 +416,7 @@ class Mod:
         server = ctx.message.server
         if server.id not in self.ignore_list["SERVERS"]:
             self.ignore_list["SERVERS"].append(server.id)
-            fileIO("data/mod/ignorelist.json", "save", self.ignore_list)
+            fileIO("config/mod/ignorelist.json", "save", self.ignore_list)
             await self.bot.say("This server has been added to the ignore list.")
         else:
             await self.bot.say("This server is already being ignored.")
@@ -438,14 +438,14 @@ class Mod:
         if not channel:
             if current_ch.id in self.ignore_list["CHANNELS"]:
                 self.ignore_list["CHANNELS"].remove(current_ch.id)
-                fileIO("data/mod/ignorelist.json", "save", self.ignore_list)
+                fileIO("config/mod/ignorelist.json", "save", self.ignore_list)
                 await self.bot.say("This channel has been removed from the ignore list.")
             else:
                 await self.bot.say("This channel is not in the ignore list.")
         else:
             if channel.id in self.ignore_list["CHANNELS"]:
                 self.ignore_list["CHANNELS"].remove(channel.id)
-                fileIO("data/mod/ignorelist.json", "save", self.ignore_list)
+                fileIO("config/mod/ignorelist.json", "save", self.ignore_list)
                 await self.bot.say("Channel removed from ignore list.")
             else:
                 await self.bot.say("That channel is not in the ignore list.")
@@ -456,7 +456,7 @@ class Mod:
         server = ctx.message.server
         if server.id in self.ignore_list["SERVERS"]:
             self.ignore_list["SERVERS"].remove(server.id)
-            fileIO("data/mod/ignorelist.json", "save", self.ignore_list)
+            fileIO("config/mod/ignorelist.json", "save", self.ignore_list)
             await self.bot.say("This server has been removed from the ignore list.")
         else:
             await self.bot.say("This server is not in the ignore list.")
@@ -507,7 +507,7 @@ class Mod:
                 self.filter[server.id].append(w.lower())
                 added += 1
         if added:
-            fileIO("data/mod/filter.json", "save", self.filter)
+            fileIO("config/mod/filter.json", "save", self.filter)
             await self.bot.say("Words added to filter.")
         else:
             await self.bot.say("Words already in the filter.")
@@ -533,7 +533,7 @@ class Mod:
                 self.filter[server.id].remove(w.lower())
                 removed += 1
         if removed:
-            fileIO("data/mod/filter.json", "save", self.filter)
+            fileIO("config/mod/filter.json", "save", self.filter)
             await self.bot.say("Words removed from filter.")
         else:
             await self.bot.say("Those words weren't in the filter.")
@@ -677,7 +677,7 @@ class Mod:
                     names = deque(self.past_names[before.id], maxlen=20)
                     names.append(after.name)
                     self.past_names[before.id] = list(names)
-            dataIO.save_json("data/mod/past_names.json", self.past_names)
+            dataIO.save_json("config/mod/past_names.json", self.past_names)
 
         if before.nick != after.nick and after.nick is not None:
             server = before.server
@@ -691,11 +691,11 @@ class Mod:
             if after.nick not in nicks:
                 nicks.append(after.nick)
                 self.past_nicknames[server.id][before.id] = list(nicks)
-                dataIO.save_json("data/mod/past_nicknames.json",
+                dataIO.save_json("config/mod/past_nicknames.json",
                                  self.past_nicknames)
 
 def check_folders():
-    folders = ("data", "data/mod/")
+    folders = ("data", "config/mod/")
     for folder in folders:
         if not os.path.exists(folder):
             print("Creating " + folder + " folder...")
@@ -705,29 +705,29 @@ def check_folders():
 def check_files():
     ignore_list = {"SERVERS": [], "CHANNELS": []}
 
-    if not os.path.isfile("data/mod/blacklist.json"):
+    if not os.path.isfile("config/mod/blacklist.json"):
         print("Creating empty blacklist.json...")
-        fileIO("data/mod/blacklist.json", "save", [])
+        fileIO("config/mod/blacklist.json", "save", [])
 
-    if not os.path.isfile("data/mod/whitelist.json"):
+    if not os.path.isfile("config/mod/whitelist.json"):
         print("Creating empty whitelist.json...")
-        fileIO("data/mod/whitelist.json", "save", [])
+        fileIO("config/mod/whitelist.json", "save", [])
 
-    if not os.path.isfile("data/mod/ignorelist.json"):
+    if not os.path.isfile("config/mod/ignorelist.json"):
         print("Creating empty ignorelist.json...")
-        fileIO("data/mod/ignorelist.json", "save", ignore_list)
+        fileIO("config/mod/ignorelist.json", "save", ignore_list)
 
-    if not os.path.isfile("data/mod/filter.json"):
+    if not os.path.isfile("config/mod/filter.json"):
         print("Creating empty filter.json...")
-        fileIO("data/mod/filter.json", "save", {})
+        fileIO("config/mod/filter.json", "save", {})
 
-    if not os.path.isfile("data/mod/past_names.json"):
+    if not os.path.isfile("config/mod/past_names.json"):
         print("Creating empty past_names.json...")
-        fileIO("data/mod/past_names.json", "save", {})
+        fileIO("config/mod/past_names.json", "save", {})
 
-    if not os.path.isfile("data/mod/past_nicknames.json"):
+    if not os.path.isfile("config/mod/past_nicknames.json"):
         print("Creating empty past_nicknames.json...")
-        fileIO("data/mod/past_nicknames.json", "save", {})
+        fileIO("config/mod/past_nicknames.json", "save", {})
 
 
 
@@ -740,7 +740,7 @@ def setup(bot):
     if logger.level == 0:
         logger.setLevel(logging.INFO)
         handler = logging.FileHandler(
-            filename='data/mod/mod.log', encoding='utf-8', mode='a')
+            filename='config/mod/mod.log', encoding='utf-8', mode='a')
         handler.setFormatter(
             logging.Formatter('%(asctime)s %(message)s', datefmt="[%d/%m/%Y %H:%M]"))
         logger.addHandler(handler)

@@ -14,7 +14,7 @@ class Trivia:
     def __init__(self, bot):
         self.bot = bot
         self.trivia_sessions = []
-        self.settings = fileIO("data/trivia/settings.json", "load")
+        self.settings = fileIO("config/trivia/settings.json", "load")
 
     @commands.group(pass_context=True)
     @checks.mod_or_permissions(administrator=True)
@@ -32,7 +32,7 @@ class Trivia:
         """Points required to win"""
         if score > 0:
             self.settings["TRIVIA_MAX_SCORE"] = score
-            fileIO("data/trivia/settings.json", "save", self.settings)
+            fileIO("config/trivia/settings.json", "save", self.settings)
             await self.bot.say("Points required to win set to {}".format(str(score)))
         else:
             await self.bot.say("Score must be superior to 0.")
@@ -42,7 +42,7 @@ class Trivia:
         """Maximum seconds to answer"""
         if seconds > 4:
             self.settings["TRIVIA_DELAY"] = seconds
-            fileIO("data/trivia/settings.json", "save", self.settings)
+            fileIO("config/trivia/settings.json", "save", self.settings)
             await self.bot.say("Maximum seconds to answer set to {}".format(str(seconds)))
         else:
             await self.bot.say("Seconds must be at least 5.")
@@ -56,7 +56,7 @@ class Trivia:
         else:
             self.settings["TRIVIA_BOT_PLAYS"] = True
             await self.bot.say("I'll gain a point everytime you don't answer in time.")
-        fileIO("data/trivia/settings.json", "save", self.settings)
+        fileIO("config/trivia/settings.json", "save", self.settings)
 
     @commands.command(pass_context=True)
     async def trivia(self, ctx, list_name : str=None):
@@ -84,7 +84,7 @@ class Trivia:
 
     async def trivia_list(self, author):
         msg = "**Available trivia lists:** \n\n```"
-        lists = os.listdir("data/trivia/")
+        lists = os.listdir("config/trivia/")
         if lists:
             clean_list = []
             for txt in lists:
@@ -121,14 +121,14 @@ class TriviaSession():
         if len(msg) == 2:
             _, qlist = msg
             if qlist == "random":
-                chosen_list = randchoice(glob.glob("data/trivia/*.txt"))
+                chosen_list = randchoice(glob.glob("config/trivia/*.txt"))
                 self.question_list = self.load_list(chosen_list)
                 self.status = "new question"
                 self.timeout = time.perf_counter()
                 if self.question_list: await self.new_question()
             else:
-                if os.path.isfile("data/trivia/" + qlist + ".txt"):
-                    self.question_list = self.load_list("data/trivia/" + qlist + ".txt")
+                if os.path.isfile("config/trivia/" + qlist + ".txt"):
+                    self.question_list = self.load_list("config/trivia/" + qlist + ".txt")
                     self.status = "new question"
                     self.timeout = time.perf_counter()
                     if self.question_list: await self.new_question()
@@ -270,7 +270,7 @@ async def check_messages(message):
             await trvsession.check_answer(message)
 
 def check_folders():
-    folders = ("data", "data/trivia/")
+    folders = ("data", "config/trivia/")
     for folder in folders:
         if not os.path.exists(folder):
             print("Creating " + folder + " folder...")
@@ -279,9 +279,9 @@ def check_folders():
 def check_files():
     settings = {"TRIVIA_MAX_SCORE" : 10, "TRIVIA_TIMEOUT" : 120,  "TRIVIA_DELAY" : 15, "TRIVIA_BOT_PLAYS" : False}
 
-    if not os.path.isfile("data/trivia/settings.json"):
+    if not os.path.isfile("config/trivia/settings.json"):
         print("Creating empty settings.json...")
-        fileIO("data/trivia/settings.json", "save", settings)
+        fileIO("config/trivia/settings.json", "save", settings)
 
 def setup(bot):
     global trivia_manager
